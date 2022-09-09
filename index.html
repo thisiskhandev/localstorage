@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form LocalStorage</title>
+    <script>
+      const fetchCountries = async () => {
+        const res = await fetch("./countries.json", {
+          method: "GET",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+        let keys = Object.values(data);
+        console.log(keys.length);
+        for (let key of keys) {
+          // console.log(key);
+        }
+      };
+      fetchCountries();
+    </script>
+  </head>
+
+  <body>
+    <p id="demo"></p>
+    <form id="myForm" onsubmit="return false">
+      <input type="text" name="name" value="Name" required /><br /><br />
+      <input type="number" name="phone" value="12345" required /><br /><br />
+      <select name="class" id="" name="class" required>
+        <option disabled selected>Select Your Class</option>
+        <option value="class 1">class 1</option>
+        <option value="class 2">class 2</option>
+        <option value="class 3">class 3</option></select
+      ><br />
+      <h3>Choose Your Gender</h3>
+      <label for="male"
+        >Male
+        <input
+          type="radio"
+          id="male"
+          name="gender"
+          value="male"
+          checked /></label
+      ><br />
+      <label for="female"
+        >Female
+        <input
+          type="radio"
+          id="female"
+          data-khan="true"
+          name="gender"
+          value="female"
+        />
+      </label>
+      <br />
+      <label for="nogender"
+        >Rather Not To Say
+        <input type="radio" id="nogender" name="gender" value="nogender" />
+      </label>
+      <br />
+
+      <h3>Choose Your Country</h3>
+      <select name="country" id="country" required>
+        <option value="Pakistan">Pakistan</option>
+        <option value="India">India</option>
+        <option value="Bangladesh">Bangladesh</option>
+        <option value="Japan">Japan</option>
+        <option value="China">China</option></select
+      ><br />
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      document
+        .querySelector("form#myForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          var name = document.querySelector('input[name="name"]').value;
+          var phone = document.querySelector('input[name="phone"]').value;
+          var stdClass = document.querySelector('select[name="class"]').value;
+          var gender = document.querySelector(
+            'input[name="gender"]:checked'
+          ).value;
+          var country = document.querySelector(
+            'select[name="country"]'
+          ).value;
+          const stdData = { name, phone, stdClass, gender, country };
+          document.write(
+            `<button onclick="window.location.reload(true)">Home</button> <br/> <a href="admin.html">Admin Page</a>`
+          );
+          localStorage.setItem("studentData", JSON.stringify(stdData));
+          let mystdData = JSON.parse(localStorage.getItem("studentData"));
+          console.log(mystdData);
+        });
+
+      // localStorage.clear();
+    </script>
+  </body>
+</html>
