@@ -51,23 +51,29 @@
       <tr id="data"></tr>
     </table>
 
-    <a href="index.html">Home Page</a>
+    <a href="./">Home Page</a>
 
-    <button onclick="localStorage.clear();">Clear Data</button>
+    <button onclick="clearData()">Clear Data</button>
     <script>
       let mystdData = JSON.parse(localStorage.getItem("studentData"));
       console.log(mystdData);
       let data = document.getElementById("data");
-        data.insertAdjacentHTML("beforeend", `<td>${1}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${mystdData.name}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${mystdData.phone}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${mystdData.stdClass}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${mystdData.gender}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${mystdData.country}</td>`);
-        data.insertAdjacentHTML(
-          "beforeend",
-          `<td><button class="btn del">Delete</button></td>`
-        );
+      data.insertAdjacentHTML("beforeend", `<td>${1}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData.name}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData.phone}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData.stdClass}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData.gender}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData.country}</td>`);
+      data.insertAdjacentHTML(
+        "beforeend",
+        `<td><button class="btn del">Delete</button></td>`
+      );
+      // localStorage.clear();
+      function clearData() {
+        localStorage.clear();
+        alert("Local Storage Cleared, Refreshing in 3 sec");
+        setTimeout(location.reload(), 10000);
+      }
     </script>
   </body>
 </html>

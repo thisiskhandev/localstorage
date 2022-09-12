@@ -92,12 +92,10 @@
             'select[name="country"]'
           ).value;
           const stdData = { name, phone, stdClass, gender, country };
-          document.write(
-            `<button onclick="window.location.reload(true)">Home</button> <br/> <a href="admin.html">Admin Page</a>`
-          );
           localStorage.setItem("studentData", JSON.stringify(stdData));
           let mystdData = JSON.parse(localStorage.getItem("studentData"));
           console.log(mystdData);
+          window.location.href = "./admin.html";
         });
 
       // localStorage.clear();
