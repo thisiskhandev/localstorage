@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.32/sweetalert2.css"
+      integrity="sha512-e+TwvhjDvKqpzQLJ7zmtqqz+5jF9uIOa+5s1cishBRfmapg7mqcEzEl44ufb04BXOsEbccjHK9V0IVukORmO8w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Admin Page</title>
     <style>
       #customers {
@@ -59,20 +67,22 @@
       console.log(mystdData);
       let data = document.getElementById("data");
       data.insertAdjacentHTML("beforeend", `<td>${1}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData.name}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData.phone}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData.stdClass}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData.gender}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData.country}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].name}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].phone}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].stdClass}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].gender}</td>`);
+      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].country}</td>`);
       data.insertAdjacentHTML(
         "beforeend",
         `<td><button class="btn del">Delete</button></td>`
       );
       // localStorage.clear();
       function clearData() {
-        localStorage.clear();
         alert("Local Storage Cleared, Refreshing in 3 sec");
-        setTimeout(location.reload(), 10000);
+        localStorage.clear();
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
       }
     </script>
   </body>

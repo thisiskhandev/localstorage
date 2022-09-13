@@ -4,8 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.32/sweetalert2.css"
+      integrity="sha512-e+TwvhjDvKqpzQLJ7zmtqqz+5jF9uIOa+5s1cishBRfmapg7mqcEzEl44ufb04BXOsEbccjHK9V0IVukORmO8w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
     <title>Form LocalStorage</title>
     <script>
+      // swal({ html: true, title: "<i>TITLE</i>", text: "<b>TEXT</b>" });
       const fetchCountries = async () => {
         const res = await fetch("./countries.json", {
           method: "GET",
@@ -29,54 +39,56 @@
   </head>
 
   <body>
-    <p id="demo"></p>
-    <form id="myForm" onsubmit="return false">
-      <input type="text" name="name" value="Name" required /><br /><br />
-      <input type="number" name="phone" value="12345" required /><br /><br />
-      <select name="class" id="" name="class" required>
-        <option disabled selected>Select Your Class</option>
-        <option value="class 1">class 1</option>
-        <option value="class 2">class 2</option>
-        <option value="class 3">class 3</option></select
-      ><br />
-      <h3>Choose Your Gender</h3>
-      <label for="male"
-        >Male
-        <input
-          type="radio"
-          id="male"
-          name="gender"
-          value="male"
-          checked /></label
-      ><br />
-      <label for="female"
-        >Female
-        <input
-          type="radio"
-          id="female"
-          data-khan="true"
-          name="gender"
-          value="female"
-        />
-      </label>
-      <br />
-      <label for="nogender"
-        >Rather Not To Say
-        <input type="radio" id="nogender" name="gender" value="nogender" />
-      </label>
-      <br />
+    <main class="center">
+      <h1>Register Form</h1>
+      <form id="myForm" class="form" onsubmit="return false">
+        <div class="form_control">
+          <input type="text" name="name" value="Name" />
+          <input type="number" name="phone" value="12345" />
+        </div>
+        <div class="form_control">
+          <select name="class" id="" name="class">
+            <option value disabled selected>Select Your Class</option>
+            <option value="class 1">class 1</option>
+            <option value="class 2">class 2</option>
+            <option value="class 3">class 3</option>
+          </select>
+        </div>
+        <h3>Choose Your Gender</h3>
+        <div class="form_control gender">
+          <label for="male"
+            >Male
+            <input type="radio" id="male" name="gender" value="male" checked
+          /></label>
+          <label for="female"
+            >Female
+            <input
+              type="radio"
+              id="female"
+              data-khan="true"
+              name="gender"
+              value="female"
+            />
+          </label>
 
-      <h3>Choose Your Country</h3>
-      <select name="country" id="country" required>
-        <option value="Pakistan">Pakistan</option>
-        <option value="India">India</option>
-        <option value="Bangladesh">Bangladesh</option>
-        <option value="Japan">Japan</option>
-        <option value="China">China</option></select
-      ><br />
-      <br /><br />
-      <button type="submit">Submit</button>
-    </form>
+          <label for="nogender"
+            >Rather Not To Say
+            <input type="radio" id="nogender" name="gender" value="nogender" />
+          </label>
+        </div>
+        <h3>Choose Your Country</h3>
+        <div class="form_control">
+          <select name="country" id="country">
+            <option value="Pakistan">Pakistan</option>
+            <option value="India">India</option>
+            <option value="Bangladesh">Bangladesh</option>
+            <option value="Japan">Japan</option>
+            <option value="China">China</option>
+          </select>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </main>
     <script>
       document
         .querySelector("form#myForm")
@@ -88,14 +100,20 @@
           var gender = document.querySelector(
             'input[name="gender"]:checked'
           ).value;
-          var country = document.querySelector(
-            'select[name="country"]'
-          ).value;
-          const stdData = { name, phone, stdClass, gender, country };
-          localStorage.setItem("studentData", JSON.stringify(stdData));
-          let mystdData = JSON.parse(localStorage.getItem("studentData"));
-          console.log(mystdData);
-          window.location.href = "./admin.html";
+          var country = document.querySelector('select[name="country"]').value;
+          if (!name || !phone || !stdClass || !gender || !country) {
+            alert("Please fill the data first!");
+          } else {
+            let stdData = [{ name, phone, stdClass, gender, country }];
+            localStorage.setItem("studentData", JSON.stringify(stdData));
+            let mystdData = JSON.parse(localStorage.getItem("studentData"));
+            // mystdData.forEach((element) => {
+            //   console.log(element);
+            // });
+            alert("Data Saved into localstorage!");
+            console.log(mystdData);
+            // window.location.href = "./admin.html";
+          }
         });
 
       // localStorage.clear();
