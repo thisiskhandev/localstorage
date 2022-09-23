@@ -104,6 +104,7 @@
           if (!name || !phone || !stdClass || !gender || !country) {
             alert("Please fill the data first!");
           } else {
+            let arr = [];
             let stdData = [{ name, phone, stdClass, gender, country }];
             localStorage.setItem("studentData", JSON.stringify(stdData));
             let mystdData = JSON.parse(localStorage.getItem("studentData"));

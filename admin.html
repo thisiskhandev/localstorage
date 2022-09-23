@@ -47,16 +47,20 @@
     <h1>Admin Page</h1>
 
     <table id="customers">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Class</th>
-        <th>Gender</th>
-        <th>Country</th>
-        <th>Actions</th>
-      </tr>
-      <tr id="data"></tr>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Class</th>
+          <th>Gender</th>
+          <th>Country</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr class="data"></tr>
+      </tbody>
     </table>
 
     <a href="./">Home Page</a>
@@ -65,17 +69,28 @@
     <script>
       let mystdData = JSON.parse(localStorage.getItem("studentData"));
       console.log(mystdData);
-      let data = document.getElementById("data");
-      data.insertAdjacentHTML("beforeend", `<td>${1}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].name}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].phone}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].stdClass}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].gender}</td>`);
-      data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].country}</td>`);
-      data.insertAdjacentHTML(
-        "beforeend",
-        `<td><button class="btn del">Delete</button></td>`
-      );
+      let data = document.querySelectorAll(".data")[0];
+
+      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].name}</td>`);
+      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].phone}</td>`);
+      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].stdClass}</td>`);
+      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].gender}</td>`);
+      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].country}</td>`);
+      // let tablerow = document.createElement("tr");
+      mystdData.forEach((element, index) => {
+        // console.log(element);
+        data.insertAdjacentHTML("beforeend", `<td>${index + 1}</td>`);
+        data.insertAdjacentHTML("beforeend", `<td>${element.name}</td>`);
+        data.insertAdjacentHTML("beforeend", `<td>${element.phone}</td>`);
+        data.insertAdjacentHTML("beforeend", `<td>${element.stdClass}</td>`);
+        data.insertAdjacentHTML("beforeend", `<td>${element.gender}</td>`);
+        data.insertAdjacentHTML("beforeend", `<td>${element.country}</td>`);
+        data.insertAdjacentHTML(
+          "beforeend",
+          `<td><button class="btn del">Delete</button></td>`
+        );
+      });
+
       // localStorage.clear();
       function clearData() {
         alert("Local Storage Cleared, Refreshing in 3 sec");
