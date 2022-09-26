@@ -12,82 +12,61 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="styles.css" />
+
     <title>Admin Page</title>
-    <style>
-      #customers {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      #customers td,
-      #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-
-      #customers tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      #customers tr:hover {
-        background-color: #ddd;
-      }
-
-      #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #04aa6d;
-        color: white;
-      }
-    </style>
   </head>
   <body>
-    <h1>Admin Page</h1>
-
-    <table id="customers">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Class</th>
-          <th>Gender</th>
-          <th>Country</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <tr class="data"></tr>
-      </tbody>
-    </table>
-
-    <a href="./">Home Page</a>
-
-    <button onclick="clearData()">Clear Data</button>
+    <main class="container">
+      <h1>Admin Page</h1>
+      <table id="customers">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Class</th>
+            <th>Gender</th>
+            <th>Country</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="flex flex_col">
+        <a href="./" class="btn">Home Page</a>
+        <button
+          style="background-color: #000"
+          class="btn"
+          onclick="clearData()"
+        >
+          Clear Data
+        </button>
+        <button
+          style="background-color: #000"
+          class="btn"
+          onclick='(function() {
+            alert("test");
+            return false;
+          })();return false;'
+        >
+          Test
+        </button>
+      </div>
+    </main>
     <script>
       let mystdData = JSON.parse(localStorage.getItem("studentData"));
       console.log(mystdData);
-      let data = document.querySelectorAll(".data")[0];
-
-      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].name}</td>`);
-      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].phone}</td>`);
-      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].stdClass}</td>`);
-      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].gender}</td>`);
-      // data.insertAdjacentHTML("beforeend", `<td>${mystdData[0].country}</td>`);
-      // let tablerow = document.createElement("tr");
-      mystdData.forEach((element, index) => {
-        // console.log(element);
-        data.insertAdjacentHTML("beforeend", `<td>${index + 1}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${element.name}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${element.phone}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${element.stdClass}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${element.gender}</td>`);
-        data.insertAdjacentHTML("beforeend", `<td>${element.country}</td>`);
+      let data = document.querySelectorAll("#tbody")[0];
+      mystdData.forEach((element, index, arr) => {
+        console.log(arr);
         data.insertAdjacentHTML(
           "beforeend",
-          `<td><button class="btn del">Delete</button></td>`
+          `<td>${index + 1}</td><td>${element.name}</td><td>${
+            element.phone
+          }</td><td>${element.stdClass}</td><td>${element.gender}</td><td>${
+            element.country
+          }</td><td><button class="btn del" onclick="()=>{alert('123')}">Delete</button></td>`
         );
       });
 

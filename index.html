@@ -24,7 +24,7 @@
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Content-Type": "application/json",
           },
-        }).catch(err => console.log(err));
+        }).catch((err) => console.log(err));
         console.log(res);
         const data = await res.json();
         console.log(data);
@@ -37,7 +37,6 @@
       // fetchCountries();
     </script>
   </head>
-
   <body>
     <main class="center">
       <h1>Register Form</h1>
@@ -86,68 +85,54 @@
             <option value="China">China</option>
           </select>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn">Submit</button>
       </form>
+      <a href="admin.html" class="btn">Admin Page</a>
     </main>
     <script>
       let studentData;
-      if(localStorage.getItem("studentData")  !== null){
-  
+      if (localStorage.getItem("studentData") !== null) {
         studentData = JSON.parse(localStorage.getItem("studentData"));
-        console.log(studentData)
-      }else{
-        // localStorage.setItem("studentData", JSON.stringify('[]'));
-        // studentData = JSON.parse(localStorage.getItem("studentData"));
-        studentData=[]
+        console.log(studentData);
+      } else {
+        studentData = [];
+        localStorage.setItem("studentData", JSON.stringify(studentData));
+        studentData = JSON.parse(localStorage.getItem("studentData"));
       }
       document
-      .querySelector("form#myForm")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        // console.log(localStorage.getItem("studentData"))
-        var name = document.querySelector('input[name="name"]')
+        .querySelector("form#myForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          var name = document.querySelector('input[name="name"]');
           var phone = document.querySelector('input[name="phone"]');
           var stdClass = document.querySelector('select[name="class"]');
-          var gender = document.querySelector(
-            'input[name="gender"]:checked'
-          );
+          var gender = document.querySelector('input[name="gender"]:checked');
           var country = document.querySelector('select[name="country"]');
-        
-        // console.log(name.value)
-        // console.log(phone.value)
-        //   console.log(stdClass.value)
-        //    console.log(gender.value)
-        //     console.log(country.value)
-
-          if (!name.value || !phone.value || !stdClass.value || !gender.value || !country.value) {
+          if (
+            !name.value ||
+            !phone.value ||
+            !stdClass.value ||
+            !gender.value ||
+            !country.value
+          ) {
             alert("Please fill the data first!");
           } else {
-            let arr = [];
-            let stdData = { 
-              'name':name.value,
-              'phone':phone.value,
-              'stdClass':stdClass.value,
-              'gender':gender.value,
-              'country':country.value };
-            // localStorage.setItem("studentData", JSON.stringify(stdData));
+            let stdData = {
+              name: name.value,
+              phone: phone.value,
+              stdClass: stdClass.value,
+              gender: gender.value,
+              country: country.value,
+            };
             console.log(stdData);
-            studentData.push(stdData)
-            // console.log()
-            console.log(studentData)
+            studentData.push(stdData);
+            console.log(studentData);
             localStorage.setItem("studentData", JSON.stringify(studentData));
-            
             let mystdData = JSON.parse(localStorage.getItem("studentData"));
-            // let mystdData = JSON.parse(localStorage.getItem("studentData"));
-            // mystdData.forEach((element) => {
-            //   console.log(element);
-            // });
             alert("Data Saved into localstorage!");
             console.log(mystdData);
-            // window.location.href = "./admin.html";
           }
         });
-
-      // localStorage.clear();
     </script>
   </body>
 </html>
