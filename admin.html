@@ -42,7 +42,7 @@
         >
           Clear Data
         </button>
-        <button
+        <!-- <button
           style="background-color: #000"
           class="btn"
           onclick='(function() {
@@ -51,26 +51,24 @@
           })();return false;'
         >
           Test
-        </button>
+        </button> -->
       </div>
     </main>
     <script>
       let mystdData = JSON.parse(localStorage.getItem("studentData"));
-      console.log(mystdData);
+      console.log(mystdData[0]);
       let data = document.querySelectorAll("#tbody")[0];
       mystdData.forEach((element, index, arr) => {
-        console.log(arr);
         data.insertAdjacentHTML(
           "beforeend",
           `<td>${index + 1}</td><td>${element.name}</td><td>${
             element.phone
           }</td><td>${element.stdClass}</td><td>${element.gender}</td><td>${
             element.country
-          }</td><td><button class="btn del" onclick="()=>{alert('123')}">Delete</button></td>`
+          }</td><td><button class="btn del" onclick="theFun(${index});">Delete</button></td>`
         );
       });
 
-      // localStorage.clear();
       function clearData() {
         alert("Local Storage Cleared, Refreshing in 3 sec");
         localStorage.clear();
@@ -78,6 +76,23 @@
           location.reload();
         }, 3000);
       }
+
+      const theFun = (index) => {
+        console.log(index);
+      };
+
+      document.querySelectorAll(".btn.del").forEach((val, ind) => {
+        val.addEventListener("click", () => {
+          let proceedToDelete = confirm("Are you sure want to delete: " + ind);
+          if (proceedToDelete) {
+            mystdData.splice(ind, 1);
+            localStorage.setItem("studentData", JSON.stringify(mystdData));
+            location.reload();
+          } else {
+            console.log("not delete!");
+          }
+        });
+      });
     </script>
   </body>
 </html>

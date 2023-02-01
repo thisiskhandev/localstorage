@@ -112,41 +112,6 @@
           }
         });
     </script>
-    <script>
-      // swal({ html: true, title: "<i>TITLE</i>", text: "<b>TEXT</b>" });
-      let countries = document.getElementById("country");
-      const fetchCountries = async () => {
-        let url = "https://restcountries.com/v3.1/all";
-        const res = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Content-Type": "application/json",
-          },
-        }).catch((err) => console.log("Catch ERROR: " + err));
-        // console.log(res);
-        if (res.status === 200) {
-          const data = await res.json();
-          console.log(data[0].name.common);
-          let keys = Object.values(data);
-          console.log(keys.length);
-          data.forEach((val, index) => {
-            console.log(val.name.common);
-            let cnames = val.name.common;
-            countries.insertAdjacentHTML(
-              "beforeend",
-              `<option>${cnames}</option>`
-            );
-          });
-          for (let key of keys) {
-            // console.log(key);
-          }
-        } else {
-          console.log("Response is not 200");
-        }
-      };
-      fetchCountries();
-    </script>
+    <script src="./assets/js/index.js"></script>
   </body>
 </html>
